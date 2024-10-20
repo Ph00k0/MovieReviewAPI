@@ -1,9 +1,18 @@
 # reviews/admin.py
 
 from django.contrib import admin
-from .models import MovieReview
+from .models import Movie, Review
 
-admin.site.register(MovieReview)
+class ReviewInline(admin.TabularInline):
+    model = Review
+    extra = 1  # Number of empty forms to display
+
+class MovieAdmin(admin.ModelAdmin):
+    inlines = [ReviewInline]
+
+admin.site.register(Movie, MovieAdmin)
+admin.site.register(Review)
+
 
 
 # Register your models here.

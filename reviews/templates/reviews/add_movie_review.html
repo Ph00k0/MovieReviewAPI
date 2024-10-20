@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Movie and Review</title>
+</head>
+<body>
+    <h1>Add Movie and Review</h1>
+    <form id="movie-review-form" method="post">
+        {% csrf_token %}
+        <h2>Movie Details</h2>
+        <label for="title">Title:</label>
+        <input type="text" name="movie.title" required><br>
+        <label for="description">Description:</label>
+        <textarea name="movie.description"></textarea><br>
+        <label for="release_date">Release Date:</label>
+        <input type="date" name="movie.release_date"><br>
+
+        <h2>Review Details</h2>
+        <label for="content">Content:</label>
+        <textarea name="review.content" required></textarea><br>
+        <label for="rating">Rating:</label>
+        <input type="number" name="review.rating" min="1" max="10" required><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if movie_errors %}
+        <div style="color: red;">
+            <h3>Movie Errors:</h3>
+            <pre>{{ movie_errors }}</pre>
+        </div>
+    {% endif %}
+
+    {% if review_errors %}
+        <div style="color: red;">
+            <h3>Review Errors:</h3>
+            <pre>{{ review_errors }}</pre>
+        </div>
+    {% endif %}
+</body>
+</html>
